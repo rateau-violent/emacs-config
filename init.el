@@ -35,17 +35,49 @@
 (column-number-mode t)
 
 
-;; Keyboard shortcuts:
+;; Selection:
 
-(global-set-key (kbd "C-s") 'save-buffer)             
-(global-set-key (kbd "C-t") 'treemacs)
-(global-set-key (kbd "C-e") 'treemacs-add-and-display-current-project) 
-(global-set-key (kbd "C-r") 'treemacs-remove-project-from-workspace) 
-(global-set-key (kbd "C-C") 'copy-region-as-kill)      ;; copy       
-(global-set-key (kbd "C-V") 'yank)                     ;; paste
-(global-set-key (kbd "C-X") 'kill-region)              ;; cut           
-(global-set-key (kbd "C-z") 'undo)                              
-(global-set-key (kbd "C-q") 'save-buffers-kill-emacs)
+(delete-selection-mode 1)
+
+(defun move-text-internal (arg)
+  (cond
+   ((and mark-active transient-mark-mode)
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (let ((column (current-column))
+          (text (delete-and-extract-region (point) (mark))))
+      (forward-line arg)
+      (move-to-column column t)
+      (set-mark (point))
+      (insert text)
+      (exchange-point-and-mark)
+      (setq deactivate-mark nil)))
+   (t
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (when (or (> arg 0) (not (bobp)))
+        (forward-line)
+        (when (or (< arg 0) (not (eobp)))
+          (transpose-lines arg)
+          (when (and (eval-when-compile
+                       '(and (>= emacs-major-version 24)
+                             (>= emacs-minor-version 3)))
+                     (< arg 0))
+            (forward-line -1)))
+        (forward-line -1))
+      (move-to-column column t)))))
+
+(defun move-text-down (arg)
+  "Move region (transient-mark-mode active) or current line
+  arg lines down."
+  (interactive "*p")
+  (move-text-internal arg))
+
+(defun move-text-up (arg)
+  "Move region (transient-mark-mode active) or current line
+  arg lines up."
+  (interactive "*p")
+  (move-text-internal (- arg)))
 
 
 ;; Mouse:
@@ -69,6 +101,16 @@
   )
 
 
-;; Selection:
+;; Keyboard shortcuts:
 
-(delete-selection-mode 1)
+(global-set-key (kbd "C-q") 'save-buffers-kill-emacs)
+(global-set-key (kbd "C-s") 'save-buffer)             
+(global-set-key (kbd "C-t") 'treemacs)
+(global-set-key (kbd "C-e") 'treemacs-add-and-display-current-project) 
+(global-set-key (kbd "C-r") 'treemacs-remove-project-from-workspace) 
+(global-set-key (kbd "C-z") 'undo)                              
+(global-set-key (kbd "C-v") 'yank)      
+(global-set-key (kbd "C-x") 'kill-region)              
+(global-set-key (kbd "C-c") 'copy-region-as-kill)
+(global-set-key [M-S-down] 'move-text-down)
+(global-set-key [M-S-up] 'move-text-up)
