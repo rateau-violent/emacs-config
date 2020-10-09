@@ -36,9 +36,10 @@
 (menu-bar-mode -1)
 (column-number-mode t)
 
-;(setq-default fci-rule-column 80)
-;(setq fci-rule-width 1)
-;(setq fci-rule-color "light gray")
+;(fci-mode)
+(setq fci-rule-column 80)
+(setq fci-rule-width 1)
+(setq fci-rule-color "light gray")
 
 
 ;; Tabs:
@@ -131,17 +132,3 @@
 ;;(global-set-key (kbd "C-c") 'copy-region-as-kill)
 (global-set-key [M-S-down] 'move-text-down)
 (global-set-key [M-S-up] 'move-text-up)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (## fill-column-indicator use-package treemacs monokai-theme))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
