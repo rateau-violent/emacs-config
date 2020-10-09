@@ -7,12 +7,14 @@
 
 ;; Packages:
 
+;(require 'fill-column-indicator)
 (require 'package)
 (setq package-enable-at-startup nil) ; #1
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
                          ("gnu"   . "http://elpa.gnu.org/packages/")
                          ("melpa-stable" . "http://stable.melpa.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
+
 (package-initialize)
 
 
@@ -33,6 +35,19 @@
 (global-display-line-numbers-mode)
 (menu-bar-mode -1)
 (column-number-mode t)
+
+;(setq-default fci-rule-column 80)
+;(setq fci-rule-width 1)
+;(setq fci-rule-color "light gray")
+
+
+;; Tabs:
+
+(setq-default tab-width 4)
+
+(defun my-insert-tab-char ()
+  (interactive)
+  (insert "\t"))
 
 
 ;; Selection:
@@ -110,7 +125,23 @@
 (global-set-key (kbd "C-r") 'treemacs-remove-project-from-workspace) 
 (global-set-key (kbd "C-z") 'undo)                              
 (global-set-key (kbd "C-v") 'yank)      
-(global-set-key (kbd "C-x") 'kill-region)              
-(global-set-key (kbd "C-c") 'copy-region-as-kill)
+(global-set-key (kbd "C-x") 'kill-region)
+(global-set-key (kbd "C-H") 'std-file-header)
+(global-set-key (kbd "TAB") 'my-insert-tab-char)
+;;(global-set-key (kbd "C-c") 'copy-region-as-kill)
 (global-set-key [M-S-down] 'move-text-down)
 (global-set-key [M-S-up] 'move-text-up)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (## fill-column-indicator use-package treemacs monokai-theme))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
