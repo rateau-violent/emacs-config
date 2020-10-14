@@ -10,6 +10,7 @@ Commands:
   C-r: treemacs remove project
   C-s: save
   C-z: undo
+  C-c: copy
   C-x: cut
   C-v: paste
   C-H: Epitech header

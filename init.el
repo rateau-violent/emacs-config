@@ -18,10 +18,17 @@
 (package-initialize)
 
 
+;; Load files:
+
+(load-file "~/.emacs.d/fill_column_indicator.el")
+
 ;; Environment:
 
 (set-language-environment "UTF-8")
 
+
+;; Disable backup files:
+(setq make-backup-files nil)
 
 ;; Remove trailing spaces:
 
@@ -36,7 +43,7 @@
 (menu-bar-mode -1)
 (column-number-mode t)
 
-;(fci-mode)
+(fci-mode 1)
 (setq fci-rule-column 80)
 (setq fci-rule-width 1)
 (setq fci-rule-color "light gray")
@@ -129,6 +136,6 @@
 (global-set-key (kbd "C-x") 'kill-region)
 (global-set-key (kbd "C-H") 'std-file-header)
 (global-set-key (kbd "TAB") 'my-insert-tab-char)
-;;(global-set-key (kbd "C-c") 'copy-region-as-kill)
+(global-set-key (kbd "C-c") 'copy-region-as-kill)
 (global-set-key [M-S-down] 'move-text-down)
 (global-set-key [M-S-up] 'move-text-up)
