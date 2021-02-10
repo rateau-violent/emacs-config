@@ -18,6 +18,7 @@
 (package-initialize)
 
 
+
 ;; Load files:
 
 (load-file "~/.emacs.d/fill_column_indicator.el")
@@ -34,7 +35,7 @@
 
 (add-hook 'c-mode-hook '(lambda () (add-hook 'write-contents-hooks 'delete-trailing-whitespace nil t)))
 (add-hook 'c++-mode-hook '(lambda () (add-hook 'write-contents-hooks 'delete-trailing-whitespace nil t)))
-
+(add-hook 'haskell-mode '(lambda () (add-hook 'write-contents-hooks 'delete-trailing-whitespace nil t)))
 
 ;; Interface:
 
@@ -42,12 +43,35 @@
 (global-display-line-numbers-mode)
 (menu-bar-mode -1)
 (column-number-mode t)
+(auto-complete-mode)
 
 (fci-mode 1)
 (setq fci-rule-column 80)
 (setq fci-rule-width 1)
 (setq fci-rule-color "light gray")
 
+;; Auto complete
+
+(require 'auto-complete)
+(global-auto-complete-mode t)
+
+;; Pair
+
+(electric-pair-mode 1)
+(setq electric-pair-pairs
+      '(
+        (?\" . ?\")
+        (?\{ . ?\})
+        (?\' . ?\')))
+
+
+;; Max line length
+
+(require 'whitespace)
+(setq whitespace-line-column 80)
+(setq whitespace-style '(face lines-tail))
+
+(add-hook 'prog-mode-hook 'whitespace-mode)
 
 ;; Tabs:
 
@@ -123,6 +147,8 @@
     )
   )
 
+;; Treemacs
+
 
 ;; Keyboard shortcuts:
 
@@ -130,12 +156,29 @@
 (global-set-key (kbd "C-s") 'save-buffer)             
 (global-set-key (kbd "C-t") 'treemacs)
 (global-set-key (kbd "C-e") 'treemacs-add-and-display-current-project) 
-(global-set-key (kbd "C-r") 'treemacs-remove-project-from-workspace) 
+(global-set-key (kbd "C-r") 'treemacs-delete)
+(global-set-key (kbd "C-R") 'treemacs-remove-project-from-workspace)
+(global-set-key (kbd "C-f") 'treemacs-create-file)
+(global-set-key (kbd "C-d") 'treemacs-create-dir)
 (global-set-key (kbd "C-z") 'undo)                              
 (global-set-key (kbd "C-v") 'yank)      
-(global-set-key (kbd "C-x") 'kill-region)
-(global-set-key (kbd "C-H") 'std-file-header)
 (global-set-key (kbd "TAB") 'my-insert-tab-char)
-(global-set-key (kbd "C-c") 'copy-region-as-kill)
+(global-set-key (kbd "C-H") 'std-file-header)
+(global-set-key (kbd "C-x") 'kill-region)
+;;(global-set-key (kbd "C-c") 'copy-region-as-kill)
 (global-set-key [M-S-down] 'move-text-down)
 (global-set-key [M-S-up] 'move-text-up)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should containon ly one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (treemacs-perspective treemacs-all-the-icons autopair paredit display-theme ## fill-column-indicator auto-complete terminal-here haskell-emacs haskell-mode use-package treemacs monokai-theme))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
