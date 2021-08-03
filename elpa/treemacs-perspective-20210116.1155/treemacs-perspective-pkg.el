@@ -1,2 +1,0 @@
-;;; -*- no-byte-compile: t -*-
-(define-package "treemacs-perspective" "20210116.1155" "Perspective integration for treemacs" '((emacs "26.1") (treemacs "0.0") (perspective "2.8") (dash "2.11.0")) :commit "332d4e0f1f606c472dd083c9cdd4f143ee23020a" :authors '(("Alexander Miller" . "alexanderm@web.de") ("Jason Dufair" . "jase@dufair.org")) :maintainer '("Alexander Miller" . "alexanderm@web.de") :url "https://github.com/Alexander-Miller/treemacs")
