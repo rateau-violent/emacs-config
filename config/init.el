@@ -16,15 +16,14 @@
                          ("melpa-stable" . "http://stable.melpa.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 
-(require 'auto-complete)
-
-(require 'markdown-mode)
-
-(require 'cmake-mode)
-
-(require 'haskell-mode)
-
 (package-initialize)
+
+(setq package-selected-packages '(auto-complete markdown-mode cmake-mode haskell-mode company company-c-headers))
+
+(when (cl-find-if-not #'package-installed-p package-selected-packages)
+  (package-refresh-contents)
+
+  (mapc #'package-install package-selected-packages))
 
 ;; -------------------- ;;
 
@@ -40,6 +39,8 @@
 
 (load-file "~/.emacs.d/mouse.el")
 
+(load-file "~/.emacs.d/epitech-header.el")
+
 ;; ---------------------- ;;
 
 
@@ -52,7 +53,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
- '(package-selected-packages '(haskell-mode markdown-mode auto-complete ##)))
+ '(package-selected-packages '(markdown-mode auto-complete ##)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -74,8 +75,8 @@
 
 ;; ===== EMACS FILES ===== ;;
 
-(setq create-lock-files nil) ; disable lock files
+(setq-default create-lock-files nil) ; disable lock files
 
-(setq make-backup-files nil) ; disable backup files
+(setq-default make-backup-files nil) ; disable backup files
 
 ;; ----------------------- ;;

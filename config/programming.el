@@ -8,7 +8,7 @@
 
 (electric-pair-mode 1)
 
-(setq electric-pair-pairs
+(setq-default electric-pair-pairs
       '(
         (?\" . ?\")
         (?\{ . ?\})
@@ -23,6 +23,7 @@
 ;; ===== TRAILING SPACES ===== ;;
 
 (add-hook 'prog-mode-hook '(lambda () (add-hook 'write-contents-hooks 'delete-trailing-whitespace nil t)))
+(add-hook 'prog-mode-hook 'global-company-mode)
 
 ;; --------------------------- ;;
 
@@ -30,11 +31,11 @@
 
 ;; ===== TABS ===== ;;
 
-(electric-indent-mode -1)
-
-(setq-default intent-tabs-mode nil)
-
 (setq-default tab-width 4)
+
+(setq-default indent-tabs-mode nil)
+
+(setq-default tab-always-indent nil)
 
 ;; ---------------- ;;
 
@@ -42,7 +43,13 @@
 
 ;; ===== AUTO COMPLETE ===== ;;
 
-(global-auto-complete-mode t)
+(global-company-mode t)
+
+(setq-default company-backend (delete 'company-semantic company-backends))
+
+(add-to-list 'company-backends 'company-c-headers)
+
+(add-to-list 'company-backends 'company-clang)
 
 ;; ------------------------- ;;
 
@@ -55,15 +62,9 @@
 ;; --------------------- ;;
 
 
+;; ===== c ===== ;;
 
-;; ===== MAX LINE LENGTH ===== ;;
+(setq-default c-default-style "linux"
+              c-basic-offset 4)
 
-(add-hook 'c-mode-hook '(whitespace-line-column 80))
-
-(add-hook 'haskell-mode-hook '(whitespace-line-column 79))
-
-(add-hook 'c++-mode-hook '(whitespace-line-column 120))
-
-(setq whitespace-style '(face lines-tail))
-
-;; --------------------------- ;;
+;; ------------- ;;

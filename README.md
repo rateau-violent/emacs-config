@@ -14,7 +14,7 @@ An emacs configuration for my  Epitech projects. (Linux)
 ```bash
 mkdir ~/.emacs.d/
 ```
-2. Copy alle the `config/` files in the directory `~/.emacs.d/`.
+2. Copy all the `config/` files in the directory `~/.emacs.d/`.
 
 ### Theme
 
@@ -24,16 +24,6 @@ cd ~/.emacs.d/ && mkdir themes/
 ```
 2. [Download the monokai-theme file.](https://github.com/oneKelvinSmith/monokai-emacs/blob/master/monokai-theme.el)
 3. Copy the monokai-theme file in the `~/.emacs.d/themes/` directory.
-
-### Packages
-
-1. Refresh emacs packages: `M-x packages-refresh-contents`
-2. Install required packages: `M-x packages-install`
-    * `auto-complete`
-    * `markdown-mode`
-    * `haskell-mode`
-    * `cmake-mode`
-
 
 ## Custom key bindings
 
