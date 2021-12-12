@@ -16,15 +16,6 @@ mkdir ~/.emacs.d/
 ```
 2. Copy all the `config/` files in the directory `~/.emacs.d/`.
 
-### Theme
-
-1. In the directory `~/.emacs.d/` create a new directory `themes/`
-```bash
-cd ~/.emacs.d/ && mkdir themes/
-```
-2. [Download the monokai-theme file.](https://github.com/oneKelvinSmith/monokai-emacs/blob/master/monokai-theme.el)
-3. Copy the monokai-theme file in the `~/.emacs.d/themes/` directory.
-
 ## Custom key bindings
 
   * `C-n`: Open a new tab in the tab bar

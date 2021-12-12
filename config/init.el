@@ -18,7 +18,7 @@
 
 (package-initialize)
 
-(setq package-selected-packages '(auto-complete markdown-mode cmake-mode haskell-mode company company-c-headers))
+(setq package-selected-packages '(auto-complete markdown-mode cmake-mode haskell-mode company company-c-headers monokai-theme))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
